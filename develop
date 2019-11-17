@@ -1,0 +1,9 @@
+---
+all:
+  children:
+    dbservers:
+      hosts:
+        db1:
+          ansible_connection: docker
+        db2:
+          ansible_connection: docker

@@ -1,0 +1,10 @@
+---
+# docker 構築
+- hosts: localhost
+  connection: local
+  roles:
+    - docker_run
+
+# db サーバ構築のplaybook読み込み
+- name: Import playbook
+  import_playbook: dbserver.yml

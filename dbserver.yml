@@ -1,0 +1,7 @@
+---
+# dbサーバの構築
+- hosts: dbservers
+  connection: local
+  roles:
+    - bash-completion-role
+    - mysql57-role

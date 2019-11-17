@@ -1,0 +1,25 @@
+---
+# docker ネットワークを作成
+- name: Create a network
+  docker_network:
+    name: dbnetwork
+    ipam_config:
+      - subnet: 192.168.10.0/24
+
+# docker を構構築する
+- name: Create a dbserver
+  docker_container:
+    name: "{{ item.name }}"
+    tty: yes
+    command: /sbin/init
+    privileged: yes
+    image: centos:centos7
+    state: started
+    networks:
+      - name: dbnetwork
+        ipv4_address: "{{ item.ipv4 }}"
+        aliases: dbnetwork
+    networks_cli_compatible: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  with_items: "{{ docker_option }}"
